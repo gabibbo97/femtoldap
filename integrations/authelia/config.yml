@@ -1,0 +1,102 @@
+theme: dark
+
+server:
+  address: 'tcp://:9091/'
+  tls:
+    certificate: /config/tls.crt
+    key: /config/tls.key
+
+log:
+  level: debug
+
+totp:
+  disable: true
+
+webauthn:
+  disable: true
+
+authentication_backend:
+  password_reset:
+    disable: true
+  ldap:
+    address: 'ldap://127.0.0.1:3389'
+    implementation: custom
+    base_dn: dc=example,dc=com
+
+    additional_users_dn: ou=users
+    users_filter: '(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=inetOrgPerson))'
+    
+    additional_groups_dn: ou=groups
+    groups_filter: '(&(uniqueMember={dn})(objectClass=groupOfUniqueNames))'
+    group_search_mode: 'filter'
+
+    user: uid=sample_app1,ou=apps,dc=example,dc=com
+    password: sample_password
+
+    attributes:
+      username: uid
+      display_name: displayName
+      mail: mail
+      member_of: memberOf
+      group_name: cn
+
+access_control:
+  default_policy: one_factor
+
+notifier:
+  filesystem:
+    filename: /config/notification.txt
+
+session:
+  secret: 'session_secret'
+  cookies:
+    - name: authelia_session
+      authelia_url: https://127.0.0.1:9091
+      domain: 127.0.0.1
+
+storage:
+  encryption_key: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  local:
+    path: /config/db.sqlite3
+
+identity_providers:
+  oidc:
+    hmac_secret: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    jwks:
+      - algorithm: RS256
+        key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          MIIEogIBAAKCAQEAg4TPU5XABEtNaZ5nLTTS5e71yJ2RctGxHeyZkvHvanPP7FTY
+          AdbSNLas+Z5XfyzCuC9SWU0U0C8x9MttC4XrEkUJhalm4AmRJUxI2vJcN56Qke6j
+          awpyXzca2yyd66g2TAoOsjLXG32FQ5wNCKv5Y7g7FW7MrIVFYXcCC3brBeffVG2x
+          odRDoctZB0NBkw01Dk/qm4voDncCYeceRvOp3Af7xpnd7FFfGhZlSIYlkgbu3TCK
+          +I50OvPPJ1s7I+ZyRO7RPY78djZUQZf5wMoehcGKojmwPumIQUZhe+MFcq0SaWOx
+          jHqEVhNZezER6pLCE+WT8OBJ+kwm/qtJDbyLpQIDAQABAoIBACCniRKny9VFHSNs
+          QRHoW7TbcAsvlD198wwLAtaJW3iC6M01A6zxOZ/8+1W/Ctp4sqAon7msec526WBu
+          YdTKm2Md4Q9e0DwwI+mu1ygFpP/qTtrs9YZOQbeCZxikK1GnolOe66czGFWrBLuU
+          s2fDy1gHFiRsLkVnkaJxegB+tjvwyaTJVNzYw6B49zzWINLXvip29jCowxyxICw2
+          ihMsfloKCapaWRTRiwA4guSAn5Knry8gJd4zFka8fqHTTiJb6Zc20bF4w1PadSyH
+          yK6mxBqQeXFCo3pSpmpv4m5yDMZMkz88sMc2V13Uscg0A799NetyX9Wqa8dtxQeY
+          R6loRAECgYEA3lhsbFopv8GjaLKbNECmrHQFe2CG+2zpwb2hZW/k34uzXBecmHbM
+          aV7biJQA0LQY40/E7dt/We56HHSa2tjh9twdDBhlxjQ2njOZP1MDbIn/aEqSY5VX
+          aPvnUcX9vOHNQRzAmIq7VSHuNysbo/Ew7x18MVNyjq7dGjAONMuveRUCgYEAl2z7
+          E9hxXfjg1Q22b9rzOslIKKD7jSShsPN1czZbShXMouMISwKRTAs4zKRa+nKVKKUX
+          tk/EBP/on1eZG7xisHkswLxH2KvBpVTGw6QoEV1anSei8hc5gTx2RNmRyZE7CsHw
+          oJ92tg90rxLTCfxjP9JI/MsUmYj0hIqw+g1xTFECgYBmgLMzXHmkultgF/7vHuL3
+          2+DvGPgBjxtQwuBWCDimShwc15HMw+/GoAFrPHgHvw8+M/cghLF4PzWySptdSuEZ
+          Ui5d9h1tO4L2eekrRVTtw8yoQsCsAhwy/PaOP02TtzFN1DiB2ms0exj7+/aZJMcf
+          ZSNtBgBpAPpTaVYTRteVZQKBgDU5vVdQcSjS3lSFKWdP0scLES4Wx9To11zXdqU0
+          qgn0d6WZn8Sd9myAVUq5SrFVrVBIF3mhuAj52s6Hf+3b3eSh8zUb+TUTylFO5z7F
+          aMARzFQJJqFpwHDIy9mPkEsFnXc+jFIpOxTrgdw4Ba4w5MH+LGGPEIKXPTuJdIOw
+          Te7BAoGAehoY+7Mfd1rlaiva5fDEA9nObyy98Vbv8rI55DGbHKvx+FMwJOZiWuc2
+          /lPjrrjEeJIHk1JgdwN6T3ehihmeEjQlmDrcCn3/ki8K2BvVFE6qB2BE1UABATeA
+          qniQSn0sYeTdphDFyqMplQX7V8yqn/OLfoeF3OVsHdO6uPUeJjo=
+          -----END RSA PRIVATE KEY-----
+    clients:
+      - client_id: test_client
+        client_name: Test client
+        client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'
+        public: false
+        redirect_uris:
+          - http://127.0.0.1:8080/oauth2/callback
+        authorization_policy: 'one_factor'

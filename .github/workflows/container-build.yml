@@ -1,0 +1,38 @@
+name: Build container
+on:
+  push:
+    paths:
+      - .github/workflows/container-build.yml
+      - src/**
+      - .containerignore
+      - Cargo.lock
+      - Cargo.lock
+      - Containerfile
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v4
+      - name: Build container image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: |-
+            Containerfile
+          image: femtoldap
+          tags: >-
+            latest
+            ${{ github.sha }}
+      - name: Push container image
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: femtoldap
+          tags: >-
+            latest
+            ${{ github.sha }}
+          registry: ghcr.io/${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}

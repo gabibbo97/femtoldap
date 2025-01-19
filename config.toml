@@ -1,0 +1,63 @@
+base_dn = "dc=example,dc=com"
+
+[[apps]]
+uid = "sample_app1"
+password = "sample_password"
+
+[[apps]]
+uid = "sample_app2"
+password = "sample_password"
+
+[[groups]]
+name = "sample_admin_group1"
+
+[[groups]]
+name = "sample_group1"
+
+[[groups]]
+name = "sample_group2"
+
+[[users]]
+uid = "sample_admin"
+password = "sample_password"
+name = "Sample"
+surname = "Admin"
+group_names = [
+    "sample_admin_group1",
+]
+mail = "sample_admin@example.com"
+mobile_number = "+1 999 000"
+ssh_public_key = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCi9IUh35c9FW9QFP8p5gqv8h2pOxPOijJLUN7V/K0TvXS8FJgtGHI5g7UzIs0pEMxkqVibOHeg+es2pj9j9y5YTG2jZHhV3RmjO8zL80xyhC5Yweinjc6dcPJAbmvNc7VJ/6+2YiSYMOL9DGv3MmMvCJN7UipnnIXMpCjWNrtQ3Mt8dRKehsD+EglxFwHNOfndGtFzruZ65AXpqOUWxShxpHVoSzDdGeIpHHXVDIgZgRpjJRHDR33adNM2rCCuTtWH2iYxDnIydHfjaV/sW1hnxe+UpLQMfH0tNcdVVA5q3JTZyMzT3aG8c49rp/imwODb/jG9pkDZbjxALxcJ4v/+sFQy9JSXa5mu9cCD4aYfX3awvdmqb289fiPra2GWLHiTgvaJtja4M476TBq6Qukj1vtrPpTYwiETUHBo/2x+YjwVUtAbMDc85n67jEOXnW+j9VzLezp7ibKRuxO1wu3GfzLN6W3WGiB+KCsI03fodgZF5U4V6rXDGBMpB4p/xDs= sampleuser@sample",
+]
+home_directory = "/home/admin-user"
+uid_number = "1337"
+gid_number = "1337"
+
+[[users]]
+uid = "sample_user"
+password = "sample_password"
+name = "Sample"
+surname = "User"
+group_names = [
+    "sample_group1",
+]
+mail = "sample_user@example.com"
+mail_aliases = [
+    "test_alias@example.com",
+]
+mobile_number = "+1 123 456"
+ssh_public_key = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCi9IUh35c9FW9QFP8p5gqv8h2pOxPOijJLUN7V/K0TvXS8FJgtGHI5g7UzIs0pEMxkqVibOHeg+es2pj9j9y5YTG2jZHhV3RmjO8zL80xyhC5Yweinjc6dcPJAbmvNc7VJ/6+2YiSYMOL9DGv3MmMvCJN7UipnnIXMpCjWNrtQ3Mt8dRKehsD+EglxFwHNOfndGtFzruZ65AXpqOUWxShxpHVoSzDdGeIpHHXVDIgZgRpjJRHDR33adNM2rCCuTtWH2iYxDnIydHfjaV/sW1hnxe+UpLQMfH0tNcdVVA5q3JTZyMzT3aG8c49rp/imwODb/jG9pkDZbjxALxcJ4v/+sFQy9JSXa5mu9cCD4aYfX3awvdmqb289fiPra2GWLHiTgvaJtja4M476TBq6Qukj1vtrPpTYwiETUHBo/2x+YjwVUtAbMDc85n67jEOXnW+j9VzLezp7ibKRuxO1wu3GfzLN6W3WGiB+KCsI03fodgZF5U4V6rXDGBMpB4p/xDs= sampleuser@sample",
+]
+home_directory = "/home/sample-user"
+uid_number = "1000"
+gid_number = "1000"
+
+[[mail_aliases]]
+mail = "test_alias@example.com"
+aliases = [
+    "destination1@example.com",
+    "destination2@example.com",
+    "destination3@example.com",
+]

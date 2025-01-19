@@ -1,0 +1,40 @@
+[package]
+name = "femtoldap"
+version = "0.1.0"
+edition = "2024"
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+
+[dependencies]
+anyhow = "1"
+thiserror = "2"
+
+clap = { version = "4", features = [ "derive", "env" ] }
+
+futures = "0.3"
+tokio = { version = "1", features = [ "full" ] }
+tokio-util = { version = "0.7", features = [ "full" ] }
+tokio-rustls = { version = "0.26" }
+
+rustls = "0.23"
+
+ldap3_proto = "0.6"
+
+regex = "1"
+
+serde = { version = "1", features = [ "derive" ] }
+serde_with = "3"
+toml = "0.8"
+
+metrics = "0.24"
+metrics-exporter-prometheus = "0.16"
+
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = [ "json" ] }
+
+uuid = { version = "1", features = [ "v4", "v5", "fast-rng", "serde" ] }
+
+rand = "0.9"
+rand_distr = "0.5"
